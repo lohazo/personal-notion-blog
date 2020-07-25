@@ -1,6 +1,7 @@
 import { NotionRenderer, BlockMapType } from "react-notion";
 
 import { getAllPosts, Post } from "./";
+import Link from "next/link";
 
 export async function getStaticProps({
   params: { slug },
@@ -14,7 +15,7 @@ export async function getStaticProps({
   const post = posts.find((t) => t.slug === slug);
 
   const blocks = await fetch(
-    `https://notion-api.splitbee.io/v1/page/${post!.id}`
+    `https://notion-api.splitbee.io/v1/page/${post!.id}`,
   ).then((res) => res.json());
 
   return {
@@ -29,9 +30,29 @@ const BlogPost: React.FC<{ post: Post; blocks: BlockMapType }> = ({
   post,
   blocks,
 }) => (
-  <div className="content">
-    <h1>{post.title}</h1>
-    <NotionRenderer blockMap={blocks} />
+  <div className="page">
+    <main>
+      <div className="wrapper">
+        <div style={{ marginBottom: 50 }}>
+          <Link href="/">
+            <h1
+              style={{
+                display: "inline",
+                cursor: "pointer",
+                color: "#b10000",
+                textDecoration: "line-through",
+              }}
+            >
+              Overdeveloped
+            </h1>
+          </Link>
+        </div>
+        <div className="content">
+          <h1>{post.title}</h1>
+          <NotionRenderer blockMap={blocks} />
+        </div>
+      </div>
+    </main>
   </div>
 );
 
