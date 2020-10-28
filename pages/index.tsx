@@ -56,9 +56,9 @@ function HomePage({ posts }: { posts: Post[] }) {
           {/* <h1>Overdeveloped</h1> */}
           <div className="content">
             {posts.map((post) => (
-              <article>
+              <article key={post.id}>
                 <header>
-                  <Link href="/[slug]" as={`/${post.slug}`}>
+                  <Link href="/blog/[slug]" as={`/blog/${post.slug}`}>
                     <a style={{ textDecoration: "none", color: "inherit" }}>
                       <h3
                         style={{
