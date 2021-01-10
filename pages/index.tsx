@@ -18,7 +18,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
 
 export async function getStaticProps() {
   const posts = await getAllPosts();
-  console.log("getStaticProps -> posts", posts);
+  // console.log("getStaticProps -> posts", posts);
 
   return {
     props: {
